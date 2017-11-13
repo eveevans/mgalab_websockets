@@ -9,9 +9,9 @@ void setup(){
   PusherOptions options = new PusherOptions();
   options.setCluster("us2");
   Pusher pusher = new Pusher("", options);
-  Channel channel = pusher.subscribe("my-channel");
+  Channel channel = pusher.subscribe("donations");
   
-  channel.bind("my-event", new SubscriptionEventListener() {
+  channel.bind("new_donation", new SubscriptionEventListener() {
     @Override
     public void onEvent(String channelName, String eventName, final String data) {
       System.out.println(data);
