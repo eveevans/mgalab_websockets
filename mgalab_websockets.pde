@@ -7,15 +7,19 @@ import com.pusher.client.channel.SubscriptionEventListener;
 
 import http.requests.*;
 
+import codeanticode.syphon.*;
+SyphonServer server;
+
 DonationCollection donations;
 
 void setup(){  
-  size(200,200);
+  size(1920,540,P3D);
+  server = new SyphonServer(this, "ANF");
   donations = new DonationCollection();
   
   PusherOptions options = new PusherOptions();
   options.setCluster("us2");
-  Pusher pusher = new Pusher("", options);
+  Pusher pusher = new Pusher("99ee4be413cdd3ef5262", options);
   Channel channel = pusher.subscribe("donations");
         
   channel.bind("new_donation", new SubscriptionEventListener() {
@@ -35,5 +39,7 @@ void setup(){
 }
 
 void draw(){
+  background(0,0,0,255);
   donations.update();
+  server.sendScreen();
 }

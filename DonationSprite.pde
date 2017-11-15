@@ -16,6 +16,10 @@ class DonationSprite {
     return amount;
   }
   
+  String donationName(){
+    return name;
+  }
+  
   void display(){
     line(0,0,100,100);
   }
