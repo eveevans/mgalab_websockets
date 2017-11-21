@@ -5,8 +5,6 @@ import com.pusher.client.Pusher;
 import com.pusher.client.channel.Channel;
 import com.pusher.client.channel.SubscriptionEventListener;
 
-import http.requests.*;
-
 import codeanticode.syphon.*;
 SyphonServer server;
 
@@ -26,12 +24,14 @@ void setup(){
     @Override
     public void onEvent(String channelName, String eventName, final String data) {
       System.out.println(data);    
-      JSONObject donationObj = parseJSONObject(data);     
+      JSONObject donationObj = parseJSONObject(data);
       println( donationObj.getString("donor") );
       println( donationObj.getFloat("amount") );
       println( donationObj.getBoolean("anonymous") );
 
-      donations.add( donationObj.getString("donor"), donationObj.getFloat("amount"), donationObj.getBoolean("anonymous")   );
+      DonationSprite ds = new DonationSprite( donationObj.getString("donor"), donationObj.getFloat("amount"), donationObj.getBoolean("anonymous") );
+      donations.add( ds );
+      donations.updateTotalAmount( donationObj.getFloat("totalAmount")  );
     }
   });
   
@@ -41,5 +41,5 @@ void setup(){
 void draw(){
   background(0,0,0,255);
   donations.update();
-  server.sendScreen();
+  //server.sendScreen();
 }
