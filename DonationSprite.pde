@@ -5,7 +5,7 @@ class DonationSprite {
   Float amount;
   Boolean anonymous;
   
-  //String tmp = {"donor":"VIctor","amount":0.1,"anonymous":false}';
+  //String tmp = {"id": 1, "donor":"VIctor","amount":0.1,"anonymous":false}';
   
   DonationSprite(Integer pid, String pname, Float pamount, Boolean panonymous){
     id = pid;

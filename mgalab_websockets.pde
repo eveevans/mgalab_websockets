@@ -11,7 +11,7 @@ SyphonServer server;
 DonationCollection donations;
 
 void setup(){  
-  size(1920,540,P3D);
+  size(3840,540,P3D);
   server = new SyphonServer(this, "ANF");
   donations = new DonationCollection();
   

@@ -8,8 +8,16 @@ class DonationCollection {
   ArrayList<DonationSprite> donations; 
   Float totalAmount = 0.0;
   Integer donationsCount = 0;
+  PImage[] lands = new PImage[25];
   
-  DonationCollection(){    
+  DonationCollection(){  
+    
+    // initializing images
+    for(int i = 0; i < lands.length; i++){
+      lands[i] = loadImage("land"+i+".png");
+    }
+    
+    // Initilizing archive donations
     donations = new ArrayList<DonationSprite>();
         
     GetRequest get = new GetRequest(donationsURL);
@@ -55,6 +63,9 @@ class DonationCollection {
   
   void update(){
     
+    // Draw background Image based on count
+    image(lands[0],0,0);
+    
     // Draw Total
     fill(60);
     textSize(60);
@@ -73,7 +84,7 @@ class DonationCollection {
         text(str(d.donationAmount()),d.donationAmount(),d.donationAmount()+30, 800, 800);      
     }    
     
-    // Draw last 5
+    // Draw last 4
     fill(50);
     textSize(72);    
     for (int i = donations.size() - 1, j=0; i >= (Math.max(donations.size() - 5, 0)); i--, j++) {               
