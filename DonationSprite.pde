@@ -22,6 +22,10 @@ class DonationSprite {
     return name;
   }
   
+  Integer donationId(){
+    return id;
+  }
+  
   void display(){
     line(0,0,100,100);
   }

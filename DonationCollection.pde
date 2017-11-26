@@ -44,6 +44,15 @@ class DonationCollection {
     donationsCount = newDonationsTotal;
   }
   
+  void removeDonationWithId(Integer donationID){    
+    for (int i = donations.size() - 1; i >= 0; i--) {      
+      DonationSprite donation = donations.get(i);      
+      if(donation.donationId() == donationID){
+        donations.remove(i);
+      }            
+    }    
+  }
+  
   void update(){
     
     // Draw Total

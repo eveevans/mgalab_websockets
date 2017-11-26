@@ -36,11 +36,11 @@ void setup(){
     @Override
     public void onEvent(String channelName, String eventName, final String data) {
       System.out.println("DELEEEETE");    
-      JSONObject donationObj = parseJSONObject(data);      
-      // DonationSprite ds = new DonationSprite( donationObj.getInt("id"),  donationObj.getString("donor"), donationObj.getFloat("amount"), donationObj.getBoolean("anonymous") );
-      // donations.add( ds );
+      JSONObject donationObj = parseJSONObject(data);
+            
       donations.updateTotalAmount( donationObj.getFloat("totalAmount")  );
       donations.updateDonationsCount( donationObj.getInt("donationsCount") );
+      donations.removeDonationWithId( donationObj.getInt("id") );
     }
   });
   
