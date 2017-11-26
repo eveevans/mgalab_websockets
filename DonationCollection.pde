@@ -9,8 +9,11 @@ class DonationCollection {
   Float totalAmount = 0.0;
   Integer donationsCount = 0;
   PImage[] lands = new PImage[25];
+  PImage anfLogo;
   
-  DonationCollection(){  
+  DonationCollection(){
+    
+    anfLogo = loadImage("anfLogo.png");
     
     // initializing images
     for(int i = 0; i < lands.length; i++){
@@ -64,31 +67,36 @@ class DonationCollection {
   void update(){
     
     // Draw background Image based on count
-    image(lands[0],0,0);
+    Integer currentLand = donationsCount % lands.length;    
+    image(lands[currentLand],0,0);
+    
+    // Drag Logos
+    Integer logosTotal = donationsCount / lands.length;
+    for(int i = 0; i < logosTotal; i++){
+      image(anfLogo, ( 17 + 77 * i ), 88 );
+    }
+    
+    // Draw progressBar
+    Float varWidth  = 40.0;
+    Float varHeight = 235.0;
+    fill(28,74,121,153);
+    rect(55,165, varWidth, varHeight);
+    
+    fill(255,120,67,153);
+    Float stepBar = varHeight / lands.length;
+    Float progressHeight = currentLand * stepBar;
+    rect(55,165 + varHeight - progressHeight, varWidth, progressHeight);
     
     // Draw Total
-    fill(60);
-    textSize(60);
-    text( "$ " + totalAmount,  0,0,1920,800);
-    
-    // Draw Donations Count
-    text( str(donationsCount),  0,200,1920,800);  
-    
-    // Draw City
-    for(DonationSprite d : donations){
-      line(0,0,d.donationAmount(), d.donationAmount() );      
-        //String s = "Cualquier cosa";
-        fill(50);
-        textSize(72);
-        text(d.donationName(),d.donationAmount(),d.donationAmount(),800,800);
-        text(str(d.donationAmount()),d.donationAmount(),d.donationAmount()+30, 800, 800);      
-    }    
-    
+    fill(255,255,255);
+    textSize(45);
+    text( "$ " + totalAmount,  34, 408,1920,540);    
+        
     // Draw last 4
-    fill(50);
-    textSize(72);    
+    fill(255,255,255);
+    textSize(36);    
     for (int i = donations.size() - 1, j=0; i >= (Math.max(donations.size() - 5, 0)); i--, j++) {               
-      text(str(donations.get(i).donationAmount()), (j*382) ,450, ( j*384 + 384 ),540);      
+      text( "$" + donations.get(i).donationAmount() , 120 , ( 157 + j*51), 1920 , 540);      
     }    
     
   }
