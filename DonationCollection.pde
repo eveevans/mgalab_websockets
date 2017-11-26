@@ -24,7 +24,8 @@ class DonationCollection {
     donations = new ArrayList<DonationSprite>();
         
     GetRequest get = new GetRequest(donationsURL);
-    //get.addUser("username", "password");
+    // UPDATE PASSWORDS
+    //get.addUser("", "");
     get.send();
     println("Reponse Content: " + get.getContent());
     JSONObject json = parseJSONObject(  get.getContent() );
@@ -70,11 +71,10 @@ class DonationCollection {
     image(lands[currentLand],0,0);
     
     // Drag Logos
-    // Integer logosTotal = donationsCount / lands.length;
-    Integer logosTotal = donationsCount / 5;
+    Integer logosTotal = donationsCount / lands.length;    
     for(int i = 0; i < logosTotal; i++){
       image(anfLogo, ( 17 + 77 * i ), 88 );  // left
-      image(anfLogo, ( 3840  - (77 * i) ), 88 ); // right
+      image(anfLogo, ( 3840 - 77 - 34 - (77 * i)  ), 88 ); // right
     }
     
     // Draw progressBar
