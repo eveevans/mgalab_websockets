@@ -1,7 +1,9 @@
 import http.requests.*;
 
-//String donationsURL = "https://powerful-escarpment-79804.herokuapp.com/donations.json";
-String donationsURL = "http://localhost:3000/donations.json";
+String donationsURL = "https://powerful-escarpment-79804.herokuapp.com/donations.json";
+// String donationsURL = "http://localhost:3000/donations.json";
+String authUser = "";
+String authPass = "";
 
 class DonationCollection {
   
@@ -23,9 +25,8 @@ class DonationCollection {
     // Initilizing archive donations
     donations = new ArrayList<DonationSprite>();
         
-    GetRequest get = new GetRequest(donationsURL);
-    // UPDATE PASSWORDS
-    //get.addUser("", "");
+    GetRequest get = new GetRequest(donationsURL);    
+    get.addUser(authUser, authPass);
     get.send();
     println("Reponse Content: " + get.getContent());
     JSONObject json = parseJSONObject(  get.getContent() );
