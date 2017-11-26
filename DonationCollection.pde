@@ -64,41 +64,50 @@ class DonationCollection {
     }    
   }
   
-  void update(){
-    
+  void update(){    
     // Draw background Image based on count
     Integer currentLand = donationsCount % lands.length;    
     image(lands[currentLand],0,0);
     
     // Drag Logos
-    Integer logosTotal = donationsCount / lands.length;
+    // Integer logosTotal = donationsCount / lands.length;
+    Integer logosTotal = donationsCount / 5;
     for(int i = 0; i < logosTotal; i++){
-      image(anfLogo, ( 17 + 77 * i ), 88 );
+      image(anfLogo, ( 17 + 77 * i ), 88 );  // left
+      image(anfLogo, ( 3840  - (77 * i) ), 88 ); // right
     }
     
     // Draw progressBar
     Float varWidth  = 40.0;
     Float varHeight = 235.0;
     fill(28,74,121,153);
-    rect(55,165, varWidth, varHeight);
+    rect(55,165, varWidth, varHeight); // Left     
+    rect(3740,165, varWidth, varHeight); // Right
     
     fill(255,120,67,153);
     Float stepBar = varHeight / lands.length;
     Float progressHeight = currentLand * stepBar;
-    rect(55,165 + varHeight - progressHeight, varWidth, progressHeight);
-    
-    // Draw Total
-    fill(255,255,255);
-    textSize(45);
-    text( "$ " + totalAmount,  34, 408,1920,540);    
+    rect(55,165 + varHeight - progressHeight, varWidth, progressHeight);  // left
+    rect(3740,165 + varHeight - progressHeight, varWidth, progressHeight);  // right
         
     // Draw last 4
     fill(255,255,255);
     textSize(36);    
-    for (int i = donations.size() - 1, j=0; i >= (Math.max(donations.size() - 5, 0)); i--, j++) {               
-      text( "$" + donations.get(i).donationAmount() , 120 , ( 157 + j*51), 1920 , 540);      
-    }    
+    for (int i = donations.size() - 1, j=0; i >= (Math.max(donations.size() - 5, 0)); i--, j++) {
+      textAlign(LEFT);
+      text( "$" + donations.get(i).donationAmount() , 120 , ( 157 + j*51), 1920 , 540);
+      textAlign(RIGHT);
+      text( "$" + donations.get(i).donationAmount() , 120 , ( 157 + j*51), 3840 - 240 , 540);
+    }
     
+    // Draw Total LEFT
+    textAlign(LEFT);
+    fill(255,255,255);
+    textSize(45);
+    text( "$ " + totalAmount,  34, 408,3840,540);
+    textAlign(RIGHT);
+    text( "$ " + totalAmount,  34, 408, 3840 - 78 ,540);    
+    textAlign(LEFT);
   }
   
 }
