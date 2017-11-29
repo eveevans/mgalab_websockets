@@ -96,18 +96,18 @@ class DonationCollection {
     textSize(36);    
     for (int i = donations.size() - 1, j=0; i >= (Math.max(donations.size() - 5, 0)); i--, j++) {
       textAlign(LEFT);
-      text( "$" + donations.get(i).donationAmount() , 120 , ( 157 + j*51), 1920 , 540);
+      text( "$" + nfc(donations.get(i).donationAmount(),2) , 120 , ( 157 + j*51), 1920 , 540);
       textAlign(RIGHT);
-      text( "$" + donations.get(i).donationAmount() , 120 , ( 157 + j*51), 3840 - 240 , 540);
+      text( "$" + nfc(donations.get(i).donationAmount(),2) , 120 , ( 157 + j*51), 3840 - 240 , 540);
     }
     
     // Draw Total LEFT
     textAlign(LEFT);
     fill(255,255,255);
     textSize(45);
-    text( "$ " + totalAmount,  34, 408,3840,540);
+    text( "$ " + nfc(totalAmount,2),  34, 408,3840,540);
     textAlign(RIGHT);
-    text( "$ " + totalAmount,  34, 408, 3840 - 78 ,540);    
+    text( "$ " + nfc(totalAmount,2),  34, 408, 3840 - 78 ,540);    
     textAlign(LEFT);
   }
   
